@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LE.Cafe.Views.Login.LoginPage"
+             xmlns:local="clr-namespace:LE.Cafe.ViewModels"
+             xmlns:customEntry="clr-namespace:LE.Cafe.Custom"
+             Shell.NavBarIsVisible="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HeightRequest="200" BackgroundColor="#fbc821">
+            <!--<Path Fill="skyblue"
+                      HorizontalOptions="EndAndExpand">
+                    <Path.Data>
+                        <EllipseGeometry Center="70,0"
+                     RadiusX="70"
+                     RadiusY="70" />
+                    </Path.Data>
+                </Path>-->
+            <StackLayout VerticalOptions="Center">
+                <!--<Label Text="SIGN IN" FontSize="50" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"/>-->
+                <Frame CornerRadius="50" HeightRequest="180" WidthRequest="180" HorizontalOptions="Center" VerticalOptions="Center" Margin="0" Padding="0">
+                    <Image Source="leading_edge.jpg" Aspect="AspectFit"/>
+                </Frame>
+            </StackLayout>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <!--<Path Fill="skyblue"
+                      HorizontalOptions="Start">
+                    <Path.Data>
+                        <EllipseGeometry Center="2,300"
+                     RadiusX="300"
+                     RadiusY="300" />
+                    </Path.Data>
+                </Path>-->
+            <StackLayout>
+                <StackLayout Margin="15" >
+                    <Label Text="Enter Url" FontSize="20"  FontAttributes="Bold"/>
+                    <Frame BackgroundColor="#F8F8F8" CornerRadius="30"
+                           Padding="0" HeightRequest="40">
+                        <Picker Margin="15,-3,10,-10" x:Name="picker" ItemsSource="{Binding UrlList}" SelectedItem="{Binding SelectedUrl}">
+                           
+                        </Picker>
+
+                    </Frame>
+                    <Label Text="User Name" FontSize="20"  FontAttributes="Bold"/>
+                    <Frame BackgroundColor="#F8F8F8" CornerRadius="30"
+                           Padding="0" HeightRequest="40">
+                        <customEntry:CustomEntry Margin="10,0,0,0" Text="{Binding UserName}"/>
+                        
+                    </Frame>
+                    
+                    <Label Text="Password" FontSize="20"  FontAttributes="Bold"/>
+                    <Frame BackgroundColor="#F8F8F8" HeightRequest="40" CornerRadius="30"
+                           Padding="0" >
+                        <customEntry:CustomEntry IsPassword="True" Margin="10,0,0,0"
+                                                 Text="{Binding Password}"/>
+
+                    </Frame>
+                </StackLayout>
+                <StackLayout Margin="0,20,0,0">
+                    <Frame Padding="0" CornerRadius="30" 
+                            BackgroundColor="#fbc821"
+                           HeightRequest="45"
+                           WidthRequest="100"
+                           HorizontalOptions="Center">
+                        <Label Text="Login" VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                            FontAttributes="Bold"
+                               TextColor="White"
+                            FontSize="Large"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LoginCommand}" CommandParameter="{Binding }"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                   
+                    <!--<Label Text="Forgot Password" TextColor="Chocolate" FontSize="20" HorizontalTextAlignment="Center" 
+                               TranslationY="-40"/>-->
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackLayout>
+                <Label FontFamily="Material" TextColor="Chocolate" Text="&#xe935;"/>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

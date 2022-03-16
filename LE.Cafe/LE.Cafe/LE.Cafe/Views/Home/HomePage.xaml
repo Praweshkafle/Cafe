@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LE.Cafe.Views.Home.HomePage"
+             xmlns:Icons="clr-namespace:LE.Cafe.HelperClass"
+             xmlns:model="clr-namespace:LE.Cafe.Models"
+             xmlns:vm="clr-namespace:LE.Cafe.ViewModels"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="*">
+        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never">
+            <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Padding="30,15,0,0">
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Bold">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding OrganizationName}" TextColor="#fbc821"/>
+                            <!--<Span Text=" Kitchen" TextColor="#bf2103"/>-->
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                 <Frame BackgroundColor="LightGray" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,30,0" CornerRadius="20"
+                       HeightRequest="35" Padding="0">
+                    <Image Source="search.png"  HorizontalOptions="StartAndExpand" Margin="15,10,10,10"/>
+                    <!--<SearchBar Placeholder="Search Food" BackgroundColor="Transparent" />-->
+                </Frame>
+
+
+                <Label Grid.Row="4" Grid.Column="0" Text="Category" FontAttributes="Bold" Padding="5,10,0,0" FontSize="Large"/>
+               
+                <CollectionView Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+                                x:DataType="vm:HomeViewModel"
+                HorizontalScrollBarVisibility="Never" 
+                Margin="0,10"
+                ItemsSource="{Binding MenuCategories}"
+                VerticalOptions="StartAndExpand"
+                ItemsLayout="HorizontalList" 
+                HeightRequest="90">
+                   
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:MenuCategory">
+                            <StackLayout Margin="8,0">
+                                <Frame CornerRadius="10" BackgroundColor="#fbc821" WidthRequest="75"
+                                       HeightRequest="40" HasShadow="True"
+                                       VerticalOptions="FillAndExpand" HorizontalOptions="Start" Padding="0">
+                                    <Grid HorizontalOptions="Center" RowDefinitions="Auto,*"
+                                          HeightRequest="50">
+                                        <Image Grid.Row="0" Aspect="AspectFit" HeightRequest="40"
+                                               HorizontalOptions="Center" Source="https://img.search.brave.com/073dxuGbrV_C5KTLlNaQ5rG0VbZqaZSZJumLLRbF1H8/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9zaG9w/c25hcGZyZXNoLmIt/Y2RuLm5ldC93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMC8wOS92/ZWdlLW5vb2RsZS1D/TlMtY29weS5wbmc"
+                                               Margin="0,5,0,5" WidthRequest="70"/>
+                                        <Label Grid.Row="1" Text="{Binding name}" FontAttributes="Bold" 
+                                               VerticalOptions="Start" 
+                                               Margin="5,0,5,0"
+                                               HorizontalTextAlignment="Center" 
+                                               FontSize="Micro"/>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Menu Items" FontAttributes="Bold" Padding="5,10,0,0" FontSize="Large"/>
+                <CollectionView Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3"
+                                x:DataType="vm:HomeViewModel"
+                                Margin="0,45,0,0"
+                                ItemsSource="{Binding MenuItems}"
+                                ItemsUpdatingScrollMode="KeepItemsInView"
+                HorizontalScrollBarVisibility="Never"
+                HorizontalOptions="Start"
+                HeightRequest="480">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:MenuItem">
+                            <Grid ColumnDefinitions="Auto" Padding="0,20,30,0" HeightRequest="120">
+                                <Frame Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" 
+                                       HeightRequest="95" CornerRadius="20" Margin="5"
+                                       BackgroundColor="#F8F8F8">
+                                    <StackLayout>
+                                        <Label Text="{Binding name}" FontSize="20" FontAttributes="Bold"/>
+                                        <Frame Padding="5,0,5,0" CornerRadius="15" Margin="0,0,0,0" HorizontalOptions="Start" 
+                                               HeightRequest="15" HasShadow="False" BackgroundColor="#fbc821" TranslationY="-5">
+                                            <Label Margin="0" FontSize="Micro" Padding="0" VerticalOptions="CenterAndExpand" Text="Vegeterian" TextColor="White"/>
+                                        </Frame>
+                                        <Label Margin="0" HorizontalOptions="Start" Text="{Binding rate,StringFormat='Rs: {0}'}" FontSize="Small" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                </Frame>
+                                <Image Grid.Column="1" HorizontalOptions="EndAndExpand" Source="https://img.search.brave.com/xsdj_GArnXUGFZk7nQ4WQ2EnQ4gHktYLelfehUUdPCE/rs:fit:630:480:1/g:ce/aHR0cHM6Ly9wbmdw/cmVzcy5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjAvMDUv/a2lzc3BuZy1tYW5k/dS1tb21vLWJ1dXot/a2hpbmthbGktcGVs/bWVuaS01YjA3ZWVl/NjNlZjM2MC4zMDAz/MDE4NDE1MjcyNDY1/NjYyNTc5LnBuZw" HeightRequest="120" WidthRequest="120" Margin="0,-10,10,0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+            
+        </ScrollView>
+    </Grid>
+</ContentPage>
