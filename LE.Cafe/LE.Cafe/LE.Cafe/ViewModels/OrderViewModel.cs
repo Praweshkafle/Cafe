@@ -94,6 +94,15 @@ namespace LE.Cafe.ViewModels
                 }
             }
         }
+
+        private string _selectedMenuItemName;
+
+        public string SelectedMenuItemName
+        {
+            get { return _selectedMenuItemName; }
+            set { _selectedMenuItemName = value; OnPropertyChanged(nameof(SelectedMenuItemName)); }
+        }
+
         private int _quantity = 0;
 
         public int Quantity
@@ -237,6 +246,7 @@ namespace LE.Cafe.ViewModels
             {
                 SelectedMenuItem = (Models.MenuItem)obj;
                 Rate = SelectedMenuItem.rate;
+                SelectedMenuItemName = SelectedMenuItem.name;
             });
         }
 
