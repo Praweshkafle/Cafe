@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rg:PopupPage  xmlns:rg="http://rotorgames.com" 
+               xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+               xmlns:model="clr-namespace:LE.Cafe.Models"
+               xmlns:vm="clr-namespace:LE.Cafe.ViewModels"
+               xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+               x:Class="LE.Cafe.Views.RgPopup.TableList"
+               CloseWhenBackgroundIsClicked="True">
+    <rg:PopupPage.Animation>
+        <rg:ScaleAnimation
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8" />
+    </rg:PopupPage.Animation>
+
+    <!--<Grid RowDefinitions="*"
+          Padding="20"
+          VerticalOptions="CenterAndExpand">
+        <CollectionView Grid.Row="0" ItemsSource="{Binding TableCategories}" 
+                        x:Name="list"
+                        AutomationId="list"
+                        Margin="0,5,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="*">
+                        <xct:Expander Grid.Row="0" Command="{Binding LoadSubCategoriesCommand, Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}}"
+                                      CommandParameter="{Binding .}"  IsExpanded="{Binding IsExpanded,Mode=TwoWay}" BackgroundColor="LightGray">
+                            <xct:Expander.Header>
+                                    <Frame  Padding="0" HasShadow="False" Margin="10" HorizontalOptions="FillAndExpand">
+                                      <StackLayout Orientation="Horizontal" Spacing="10" AutomationId="{Binding table_category_id}">
+                                        <Label Text="{Binding name}" Margin="5" FontSize="Medium"/>
+                                       </StackLayout>
+                                    </Frame>
+                            </xct:Expander.Header>
+                            <Grid RowDefinitions="*">
+                                <StackLayout Grid.Row="0" x:Name="list1" AutomationId="list1" BindableLayout.ItemsSource="{Binding CafeTables,Mode=TwoWay, Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="model:TableCategory">
+                                            <StackLayout AutomationId="{Binding table_category_id}" Orientation="Horizontal" Spacing="10" >
+                                                    <Label Text="{Binding name}" Margin="5" FontSize="Medium"/>
+                                                </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </Grid>
+                        </xct:Expander>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>-->
+    
+    
+    <Grid RowDefinitions="*"
+        x:Name="parentLayout"
+        HeightRequest="1000"
+        Padding="20,20,20,20"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="Center">
+
+        <ListView Grid.Row="0" Margin="0,5,0,0" VerticalOptions="Center"
+                  HasUnevenRows="True"
+                  IsVisible="true"
+                                ItemsSource="{Binding TableCategories}"
+                  HeightRequest="1000"
+                                WidthRequest="300">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid RowDefinitions="*">
+                            <xct:Expander Grid.Row="0" x:Name="Expand" BackgroundColor="LightGray"
+                                          Tapped="Expand_Tapped"
+                                      Command="{Binding LoadSubCategoriesCommand, Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}}"
+                                      CommandParameter="{Binding .}" IsExpanded="{Binding IsExpanded, Mode=TwoWay}">
+                                <xct:Expander.Header  HeightRequest="50">
+                                    <Grid RowDefinitions="*" x:Name="firstGrid" >
+                                        <Frame BackgroundColor="#f2f2f2"
+                                               Grid.Row="0"
+                                               HeightRequest="30"
+                                               HasShadow="False"
+                                               IsClippedToBounds="True"
+                                               Margin="10,5,10,10"
+                                               CornerRadius="10"
+                                               Padding="10">
+                                            <Grid  ColumnDefinitions="30,*">
+                                                <Label Grid.Column="1"
+                                                           FontSize="Medium"
+                                                           TextColor="#515151"
+                                                           Text="{Binding name}"
+                                                           HorizontalTextAlignment="Start"
+                                                           Margin="0">
+                                                    
+                                                </Label>
+                                            </Grid>
+
+                                        </Frame>
+                                    </Grid>
+                                </xct:Expander.Header>
+                                <xct:Expander.ContentTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="40,0,0,0" HeightRequest="100">
+                                            <StackLayout Orientation="Vertical"
+                                                         BindableLayout.ItemsSource="{Binding CafeTables,Mode=TwoWay,Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}}">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                            <StackLayout x:Name="MainStack" Orientation="Horizontal" Spacing="10" HeightRequest="40" Margin="0,0,0,10">
+                                                                <Frame Padding="0" CornerRadius="50" HasShadow="False">
+                                                                    <Image Source="home"
+                                                                       Margin="0"
+                                                                       HeightRequest="18"
+                                                                       />
+                                                                </Frame>
+                                                                <Label x:Name="MainLabel"  Text="{Binding name}" FontAttributes="Bold"
+                                                                   TextColor="#696969"
+                                                                   VerticalOptions="Center">
+                                                               
+                                                                </Label>
+                                                            <StackLayout.GestureRecognizers>
+                                                                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding TableSelectedCommand, Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}}"
+                                                                                          CommandParameter="{Binding .}"/>
+                                                            </StackLayout.GestureRecognizers>
+                                                            </StackLayout>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </xct:Expander.ContentTemplate>
+                            </xct:Expander>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</rg:PopupPage>
